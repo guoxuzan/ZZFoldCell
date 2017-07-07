@@ -31,14 +31,17 @@
     NSArray *submodels = self.submodels;
     self.submodels = nil;
     self.belowCount = submodels.count;
-    self.supermodel.belowCount += self.belowCount;
     return submodels;
 }
 
 - (void)closeWithSubmodels:(NSArray *)submodels {
     self.submodels = [NSMutableArray arrayWithArray:submodels];
-    self.supermodel.belowCount -= self.belowCount;
     self.belowCount = 0;
+}
+
+- (void)setBelowCount:(NSUInteger)belowCount {
+    self.supermodel.belowCount += (belowCount - _belowCount);
+    _belowCount = belowCount;
 }
 
 @end
